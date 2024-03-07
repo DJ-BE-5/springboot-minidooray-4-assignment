@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/account/account.iml" filepath="$PROJECT_DIR$/account/account.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/springboot-minidooray-4-assignment.iml" filepath="$PROJECT_DIR$/.idea/springboot-minidooray-4-assignment.iml" />
     </modules>
   </component>
