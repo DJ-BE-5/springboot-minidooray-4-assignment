@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>계정 관리</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="path/to/your/custom.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Include navbar fragment -->
+<div th:replace="navbar.html"></div>
+
+<!-- Main Content -->
+<div class="container mt-4">
+    <h2>계정 관리</h2>
+    <form>
+        <div class="form-group">
+            <label for="currentPassword">현재 비밀번호</label>
+            <input type="password" class="form-control" id="currentPassword" placeholder="현재 비밀번호를 입력하세요" required>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">새 비밀번호</label>
+            <input type="password" class="form-control" id="newPassword" placeholder="새 비밀번호를 입력하세요" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">비밀번호 확인</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="비밀번호를 다시 입력하세요" required>
+        </div>
+        <button type="submit" class="btn btn-primary">변경</button>
+    </form>
+</div>
+
+<!-- External JS -->
+<script src="path/to/your/custom.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-pzjw8f+Jp7Cknp3+MX8WshAqKGi2wfc3jp6i8z7hjv2Kzx98+8Fb3Bp6Zm+VXeuD"
+        crossorigin="anonymous"></script>
+</body>
+</html>

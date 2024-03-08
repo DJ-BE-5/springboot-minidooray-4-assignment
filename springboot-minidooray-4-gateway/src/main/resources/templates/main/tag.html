@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>태그 관리 페이지</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Include navbar fragment -->
+<div th:replace="navbar.html"></div>
+
+<!-- Main Content -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div th:replace="sidebar.html"></div>
+        </div>
+        <div class="col-md-9">
+            <!-- 태그 테이블 -->
+            <h3>Tag</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">태그 이름</th>
+                    <th scope="col">태스크 개수</th>
+                    <th scope="col">삭제</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>태그1</td>
+                    <td>5</td>
+                    <td><a href="#">삭제</a></td>
+                </tr>
+                <!-- Add more rows for other tags -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-DSIYm2ZlDmFCb0JRJShsw4BXNocAHDQUZov5n44xe9thV7uz5DQVJtDf2b+o2wSj"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-pzjw8f+Jp7Cknp3+MX8WshAqKGi2wfc3jp6i8z7hjv2Kzx98+8Fb3Bp6Zm+VXeuD"
+        crossorigin="anonymous"></script>
+</body>
+</html>
