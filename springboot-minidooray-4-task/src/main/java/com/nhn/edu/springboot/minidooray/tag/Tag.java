@@ -1,11 +1,10 @@
-package com.nhn.edu.springboot.homework.entity;
+package com.nhn.edu.springboot.minidooray.tag;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Getter
 @Setter
