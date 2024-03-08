@@ -14,4 +14,11 @@ public class Tag {
     @Id
     private Long id;
     private String title;
+
+    public Tag(){
+    }
+    public Tag(Long id, String title){
+        this.id = id;
+        this.title = title;
+    }
 }

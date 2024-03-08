@@ -14,10 +14,21 @@ import javax.persistence.OneToOne;
 @Entity
 public class Task {
     @Id
-    private Long id;
+    private Long taskId;
     private String title;
     private String content;
 
     @OneToOne
     private MileStone mileStone;
+
+    public Task(){
+    }
+
+    public Task(Long taskId, String title, String content){
+        this.taskId = taskId;
+        this.title = title;
+        this.content = content;
+
+
+    }
 }

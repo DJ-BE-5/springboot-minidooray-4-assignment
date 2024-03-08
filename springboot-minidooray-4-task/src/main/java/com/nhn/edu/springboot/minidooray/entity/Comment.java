@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,15 +18,14 @@ public class Comment {
     private Long commentId;
     private Long accountId;
     private String email;
-    private String salt;
+    private LocalDateTime registeredTime;
     public Comment(){
-
     }
-    public Comment(Long commentId, Long accountId, String email, String salt){
+    public Comment(Long commentId, Long accountId, String email, LocalDateTime registeredTime){
         this.commentId = commentId;
         this.accountId = accountId;
         this.email = email;
-        this.salt = salt;
+        this.registeredTime = registeredTime;
 
     }
 }

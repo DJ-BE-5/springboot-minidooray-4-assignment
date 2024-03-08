@@ -20,7 +20,7 @@ public class Project {
     };
 
     @Id
-    private Long id;
+    private Long projectId;
     private Status status;
 /*
     @OneToMany
