@@ -1,4 +1,4 @@
-package com.nhn.edu.springboot.minidooray.tag;
+package com.nhn.edu.springboot.minidooray.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

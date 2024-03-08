@@ -1,8 +1,6 @@
-package com.nhn.edu.springboot.homework.entity;
+package com.nhn.edu.springboot.minidooray.entity;
 
 
-import com.nhn.edu.springboot.minidooray.tag.Tag;
-import com.nhn.edu.springboot.minidooray.task.Task;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
