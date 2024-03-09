@@ -25,18 +25,13 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         /**
          * todo(13) implement login check function and delete log
          */
-        if(!redisTemplate.hasKey("user")) {
+        if(redisTemplate.opsForValue().get("user") == null) {
             response.sendRedirect("/");
             return false;
         }
 
-//        Account account = (Account) redisTemplate.opsForValue().get("user").toString();
+        String accountId = redisTemplate.opsForValue().get("user").toString();
 
-
-//        if (account == null || !account.login(user[0], user[1])) {
-//            response.sendRedirect("/");
-//            return false;
-//        }
         log.info(redisTemplate.opsForValue().get("user").toString());
 
         return true;
