@@ -9,8 +9,8 @@ public interface ProjectService {
     List<Project> findAllProject();
     Optional<Project> findProjectById(Long projectId);
     Optional<Project> findProjectByAccountId(Long accountId);
-
-    Project createProject();
+    Optional<Project> findProjectByTagId(Long tagId);
+    Project createProject(Long projectId);
 
     void deleteProject(Long projectId);
 }

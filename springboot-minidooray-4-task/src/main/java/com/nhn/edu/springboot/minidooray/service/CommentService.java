@@ -1,5 +1,6 @@
 package com.nhn.edu.springboot.minidooray.service;
 
+import com.nhn.edu.springboot.minidooray.dto.CommentDto;
 import com.nhn.edu.springboot.minidooray.entity.Comment;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface CommentService {
 
     List<Comment> findAllComments();
     Optional<Comment> findCommentById(Long commentId);
+    Comment createComment(CommentDto commentDto);
 
-    Comment createComment();
     void deleteComment(Long commentId);
 }

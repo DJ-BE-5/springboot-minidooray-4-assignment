@@ -19,6 +19,7 @@ public class Comment {
     private Long accountId;
     private String email;
     private LocalDateTime registeredTime;
+    /*
     public Comment(){
     }
     public Comment(Long commentId, Long accountId, String email, LocalDateTime registeredTime){
@@ -27,5 +28,5 @@ public class Comment {
         this.email = email;
         this.registeredTime = registeredTime;
 
-    }
+    }*/
 }
