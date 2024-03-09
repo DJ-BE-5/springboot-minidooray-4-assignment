@@ -21,8 +21,7 @@ public class LogoutController {
          *  delete login information from Session-Redis
          *  and redirect at index page.
          */
-        redisTemplate.delete("foo");
-        log.info("value at foo: " + redisTemplate.opsForValue().get("foo"));
+        redisTemplate.delete("user");
         return "redirect:/";
     }
 }
