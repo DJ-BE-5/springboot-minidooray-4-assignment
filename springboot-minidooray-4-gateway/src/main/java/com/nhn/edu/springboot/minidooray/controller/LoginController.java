@@ -15,12 +15,10 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class LoginController {
     private final RedisTemplate redisTemplate;
-    private final ApiProperties apiProperties;
     private final RestTemplate restTemplate;
 
-    public LoginController(RedisTemplate redisTemplate, ApiProperties apiProperties, RestTemplate restTemplate) {
+    public LoginController(RedisTemplate redisTemplate, RestTemplate restTemplate) {
         this.redisTemplate = redisTemplate;
-        this.apiProperties = apiProperties;
         this.restTemplate = restTemplate;
     }
     @PostMapping("/login")
@@ -30,11 +28,7 @@ public class LoginController {
          *  post login information at Account-API
          *  and save at Session-Redis.
          */
-        redisTemplate.opsForValue().set("foo", "bar");
-        log.info("value at foo: " + redisTemplate.opsForValue().get("foo"));
-
-        log.info("account API end point: " + apiProperties.getAccountEndPoint());
-        log.info("task API end point: " + apiProperties.getTaskEndPoint());
+        redisTemplate.opsForValue().set("user", "example");
 
         return "redirect:/project";
     }
