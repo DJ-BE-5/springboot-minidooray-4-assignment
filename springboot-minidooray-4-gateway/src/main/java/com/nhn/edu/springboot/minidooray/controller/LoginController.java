@@ -1,5 +1,6 @@
 package com.nhn.edu.springboot.minidooray.controller;
 
+import com.nhn.edu.springboot.minidooray.dto.AccountDto;
 import com.nhn.edu.springboot.minidooray.properties.ApiProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.juli.logging.Log;
@@ -22,13 +23,13 @@ public class LoginController {
         this.restTemplate = restTemplate;
     }
     @PostMapping("/login")
-    public String login() {
+    public String login(AccountDto accountDto) {
         /**
          * todo(1)
          *  post login information at Account-API
          *  and save at Session-Redis.
          */
-        redisTemplate.opsForValue().set("user", "example");
+        redisTemplate.opsForValue().set("user", accountDto.getAccountId());
 
         return "redirect:/project";
     }
