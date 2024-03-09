@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>멤버 리스트</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Include navbar fragment -->
+<div th:replace="navbar.html"></div>
+
+<!-- Main Content -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div th:replace="sidebar.html"></div>
+        </div>
+        <div class="col-md-9">
+            <!-- 멤버 테이블 -->
+            <h3>Member</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">이메일</th>
+                    <th scope="col">역할</th>
+                    <th scope="col">삭제</th>
+                    <!-- 추가적인 멤버 속성을 표시할 수 있음 -->
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>멤버 1</td>
+                    <td>member1@example.com</td>
+                    <td>Developer</td>
+                    <td><a href="/project/1/member/memberId/delete">삭제</a></td>
+                    <!-- 각 멤버의 추가 속성을 표시할 수 있음 -->
+                </tr>
+                <!-- 추가적인 멤버를 표시할 수 있음 -->
+                </tbody>
+            </table>
+
+            <!-- 멤버 추가 폼 -->
+            <form action="/project/1/member/add" method="post">
+                <div class="input-group mb-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="memberId" placeholder="멤버 ID 입력">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">멤버 추가</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-DSIYm2ZlDmFCb0JRJShsw4BXNocAHDQUZov5n44xe9thV7uz5DQVJtDf2b+o2wSj"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-pzjw8f+Jp7Cknp3+MX8WshAqKGi2wfc3jp6i8z7hjv2Kzx98+8Fb3Bp6Zm+VXeuD"
+        crossorigin="anonymous"></script>
+</body>
+</html>

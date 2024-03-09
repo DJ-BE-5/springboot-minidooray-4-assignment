@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List - Mini Dooray!</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="navbar.html"></div>
+
+<!-- Main Content -->
+<div class="container mt-4">
+    <h2>프로젝트 리스트</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>프로젝트 이름</th>
+            <th>프로젝트 멤버 수</th>
+            <th>프로젝트 권한</th>
+            <th>프로젝트 입장</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>프로젝트 1</td>
+            <td>5</td>
+            <td>관리자</td>
+            <td><a href="/project/1/task">입장</a></td>
+        </tr>
+        <tr>
+            <td>프로젝트 2</td>
+            <td>10</td>
+            <td>사용자</td>
+            <td><a href="/project/2/task">입장</a></td>
+        </tr>
+        <!-- Add more project items as needed -->
+        </tbody>
+    </table>
+
+    <!-- 프로젝트 추가 버튼 폼 -->
+    <form action="/project/create" method="get">
+        <button type="submit" class="btn btn-primary">프로젝트 추가</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-DSIYm2ZlDmFCb0JRJShsw4BXNocAHDQUZov5n44xe9thV7uz5DQVJtDf2b+o2wSj"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-pzjw8f+Jp7Cknp3+MX8WshAqKGi2wfc3jp6i8z7hjv2Kzx98+8Fb3Bp6Zm+VXeuD"
+        crossorigin="anonymous"></script>
+</body>
+</html>
