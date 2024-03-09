@@ -29,8 +29,10 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccount(){
+
         return ResponseEntity.ok(accountService.findAllAccount());
     }
+
     @GetMapping("/{accountId}")
     public ResponseEntity<Account> getAccountById(@PathVariable String accountId) {
         return accountService.findAccountById(accountId)
@@ -58,7 +60,4 @@ public class AccountController {
         accountService.deleteAccount(accountId);
         return ResponseEntity.notFound().build();
     }
-
-
-
 }
