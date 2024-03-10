@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,17 +17,9 @@ public class Comment {
 
     @Id
     private Long commentId;
-    private Long accountId;
-    private String email;
+    private String accountId;
     private LocalDateTime registeredTime;
-    /*
-    public Comment(){
-    }
-    public Comment(Long commentId, Long accountId, String email, LocalDateTime registeredTime){
-        this.commentId = commentId;
-        this.accountId = accountId;
-        this.email = email;
-        this.registeredTime = registeredTime;
 
-    }*/
+    @ManyToOne
+    private Task task;
 }
