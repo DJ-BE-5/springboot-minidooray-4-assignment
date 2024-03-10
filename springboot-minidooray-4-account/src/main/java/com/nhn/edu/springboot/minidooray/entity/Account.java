@@ -18,5 +18,14 @@ public class Account {
     private String salt;
     private String saltedPassword;
 
-}
 
+    public Account() {
+    }
+
+    public Account (String accountId, String email, String salt, String saltedPassword){
+        this.accountId = accountId;
+        this.email = email;
+        this.salt = salt;
+        this.saltedPassword = saltedPassword;
+    }
+}
