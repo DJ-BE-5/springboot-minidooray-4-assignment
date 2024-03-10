@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class CommentDto {
     private Long commentId;
-    private Long accountId;
-    private String email;
+    private String accountId;
     private LocalDateTime registeredTime;
+    private Long taskId;
 }
