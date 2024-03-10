@@ -4,7 +4,9 @@ import com.nhn.edu.springboot.minidooray.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -30,5 +32,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/student**")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/register");
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.defaultContentType(MediaType.APPLICATION_FORM_URLENCODED);
     }
 }

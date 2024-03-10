@@ -50,32 +50,33 @@ public class ProjectController {
             String accountId = redisTemplate.opsForValue().get("user").toString();
 
             // todo: change api url
-            ResponseEntity<List<ProjectDto>> projectExchange = restTemplate.exchange(
-                    apiProperties.getTaskEndPoint() + "/projects/" + accountId,
+            ResponseEntity<List<ProjectAccountDto>> projectAccountDtoExchange = restTemplate.exchange(
+                    apiProperties.getAccountEndPoint() + "/account/" + accountId,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<>() {}
             );
 
-            List<ProjectDto> projectDtoList = projectExchange.getBody();
+            List<ProjectAccountDto> projectAccountDtoList = projectAccountDtoExchange.getBody().stream()
+                    .filter(projectAccountDto -> projectAccountDto.getAccountId().equals(accountId))
+                    .collect(Collectors.toList());
 
-            for(ProjectDto projectDto : projectDtoList) {
+            List<ProjectDto> projectDtoList = new ArrayList<>();
+
+            for(ProjectAccountDto projectDto : projectAccountDtoList) {
                 // todo: change api url
-                ResponseEntity<List<ProjectAccountDto>> projectAccountExchange = restTemplate.exchange(
-                        apiProperties.getAccountEndPoint() + "/projectaccount/" + projectDto.getProjectId(),
+                ResponseEntity<ProjectDto> projectDtoExchange = restTemplate.exchange(
+                        apiProperties.getTaskEndPoint() + "/project/" + projectDto.getProjectId(),
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<>() {}
                 );
 
-                List<AccountDto> accountDtoList = projectAccountExchange.getBody().stream()
-                        .map(projectAccountDto -> projectAccountDto.getAccount())
-                        .collect(Collectors.toList());
-
-                projectDto.setAccounts(accountDtoList);
+                projectDtoList.add(projectDtoExchange.getBody());
             }
 
             mav.addObject("projectDtoList", projectDtoList);
+
 
             return mav;
         } catch(Exception e) {
@@ -87,6 +88,10 @@ public class ProjectController {
     public String createProject(HttpServletRequest request) {
         String projectTitle = request.getParameter("projectTitle");
 
+        if(projectTitle == null || projectTitle.equals("")) {
+            return "error";
+        }
+
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -96,7 +101,7 @@ public class ProjectController {
             ProjectDto projectDto = new ProjectDto();
 
             ResponseEntity<AccountDto> accountDtoExchange = restTemplate.exchange(
-                    apiProperties.getAccountEndPoint() + "/account/" + myAccountId,
+                    apiProperties.getAccountEndPoint() + "/" + myAccountId,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<>() {}
@@ -116,14 +121,14 @@ public class ProjectController {
 
             ProjectAccountDto projectAccountDto = new ProjectAccountDto();
 
-            projectAccountDto.setProjectId(projectDto.getProjectId());
+            projectAccountDto.setProjectId(projectDtoExchange.getBody().getProjectId());
             projectAccountDto.setAccount(accountDtoExchange.getBody());
             projectAccountDto.setAuth(ProjectAccountDto.Auth.ADMIN);
 
             HttpEntity<ProjectAccountDto> projectAccountDtoHttpEntity = new HttpEntity<>(projectAccountDto, httpHeaders);
-
+            System.out.println(apiProperties.getAccountEndPoint() + "/project/" + projectDto.getProjectId() + "/account/" + accountDtoExchange.getBody().getAccountId() + "/save");
             restTemplate.exchange(
-                    apiProperties.getAccountEndPoint() + "/project/" + projectDto.getProjectId() + "/account/" + accountDtoExchange.getBody().getAccountId(),
+                    apiProperties.getAccountEndPoint() + "/project/" + projectAccountDto.getProjectId() + "/account/" + accountDtoExchange.getBody().getAccountId() + "/save",
                     HttpMethod.POST,
                     projectAccountDtoHttpEntity,
                     new ParameterizedTypeReference<>() {}

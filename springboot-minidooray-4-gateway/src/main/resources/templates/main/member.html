@@ -27,27 +27,35 @@
                     <th scope="col">이름</th>
                     <th scope="col">이메일</th>
                     <th scope="col">역할</th>
-                    <th scope="col">삭제</th>
+                    <th th:if="${isAuth}" scope="col">삭제</th>
                     <!-- 추가적인 멤버 속성을 표시할 수 있음 -->
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>멤버 1</td>
-                    <td>member1@example.com</td>
-                    <td>Developer</td>
-                    <td><a href="/project/1/member/memberId/delete">삭제</a></td>
-                    <!-- 각 멤버의 추가 속성을 표시할 수 있음 -->
+                <!-- accountDtoList와 projectAccounts를 함께 반복 -->
+                <tr th:each="accountDto : ${accountDtoList}">
+                    <!-- 이름과 이메일은 accountDto에서 가져옴 -->
+                    <td th:text="${accountDto.accountId}">멤버 이름</td>
+                    <td th:text="${accountDto.email}">example@example.com</td>
+                    <td>
+                        <!-- projectAccounts의 auth에 따라 역할 표시 -->
+                        <span th:text="${authHashMap.get(accountDto.accountId)}"></span>
+                        <!-- 다른 역할에 따른 조건 추가 가능 -->
+                    </td>
+                    <td th:if="${isAuth}">
+                        <!-- 삭제 링크 -->
+                        <a th:if="${!authHashMap.get(accountDto.accountId).toString().equals('ADMIN')}" th:href="@{'/project/'+ ${projectId} +'/member/' + ${accountDto.accountId} + '/delete'}">삭제</a>
+                    </td>
+                    <!-- 추가적인 멤버 속성을 표시할 수 있음 -->
                 </tr>
-                <!-- 추가적인 멤버를 표시할 수 있음 -->
                 </tbody>
             </table>
 
             <!-- 멤버 추가 폼 -->
-            <form action="/project/1/member/add" method="post">
+            <form th:action="@{'/project/' + ${projectId} + '/member/add'}" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="memberId" placeholder="멤버 ID 입력">
+                        <input type="text" class="form-control" name="accountId" placeholder="멤버 ID 입력">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit">멤버 추가</button>
                         </div>

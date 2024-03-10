@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -20,15 +18,11 @@ public class Project {
     };
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectId;
     private Status status;
-/*
-    @OneToMany
-    private List<Member> members;
-*/
-    @OneToMany
-    private List<Task> tasks;
+    private String title;
 
     @OneToMany
-    private List<Tag> tags;
+    private List<Task> tasks;
 }

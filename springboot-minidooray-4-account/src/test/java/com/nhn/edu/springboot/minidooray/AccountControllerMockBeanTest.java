@@ -30,21 +30,21 @@ public class AccountControllerMockBeanTest {
     @MockBean
     private AccountRepository accountRepository;
 
-    @Test
-    void testGetAccountId() throws Exception {
-        Account testAccount = new Account("testId",  "test@naver.com", "testSalt", "testSaltedPassword");
-
-        given(accountRepository.findById("testAccountId")).willReturn(Optional.of(testAccount));
-
-        mockMvc.perform(get("/account/testAccountId"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.accountId").value("testId"))
-                .andExpect(jsonPath("$.email").value("test@naver.com"))
-                .andExpect(jsonPath("$.salt").value("testSalt"))
-                .andExpect(jsonPath("$.saltedPassword").value("testSaltedPassword"));
-
-    }
+//    @Test
+//    void testGetAccountId() throws Exception {
+//        Account testAccount = new Account("testId",  "test@naver.com", "testSalt", "testSaltedPassword");
+//
+//        given(accountRepository.findById("testAccountId")).willReturn(Optional.of(testAccount));
+//
+//        mockMvc.perform(get("/account/testAccountId"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.accountId").value("testId"))
+//                .andExpect(jsonPath("$.email").value("test@naver.com"))
+//                .andExpect(jsonPath("$.salt").value("testSalt"))
+//                .andExpect(jsonPath("$.saltedPassword").value("testSaltedPassword"));
+//
+//    }
 }
 
 

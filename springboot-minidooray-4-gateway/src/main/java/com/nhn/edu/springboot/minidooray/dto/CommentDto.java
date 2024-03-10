@@ -10,4 +10,5 @@ public class CommentDto {
     private String accountId;
     private LocalDateTime registeredTime;
     private Long taskId;
+    private String content;
 }

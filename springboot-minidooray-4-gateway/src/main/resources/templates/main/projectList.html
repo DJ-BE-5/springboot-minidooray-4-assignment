@@ -19,23 +19,17 @@
         <thead>
         <tr>
             <th>프로젝트 이름</th>
-            <th>프로젝트 멤버 수</th>
-            <th>프로젝트 권한</th>
+            <th>프로젝트 상태</th>
             <th>프로젝트 입장</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>프로젝트 1</td>
-            <td>5</td>
-            <td>관리자</td>
-            <td><a href="/project/1/task">입장</a></td>
-        </tr>
-        <tr>
-            <td>프로젝트 2</td>
-            <td>10</td>
-            <td>사용자</td>
-            <td><a href="/project/2/task">입장</a></td>
+        <tr th:each="projectDto : ${projectDtoList}">
+            <!-- Populate table cells with data from projectDto -->
+            <td th:text="${projectDto.title}">프로젝트 이름</td>
+            <td th:text="${projectDto.status}">-</td>
+            <!-- Assuming projectDto has projectId -->
+            <td><a th:href="@{'/project/' + ${projectDto.projectId} + '/task'}">입장</a></td>
         </tr>
         <!-- Add more project items as needed -->
         </tbody>
@@ -44,7 +38,7 @@
     <!-- 프로젝트 추가 버튼 폼 -->
     <form action="/project/create" method="post">
         <div class="input-group mt-3">
-            <input id="projectTitle" type="text" class="form-control" placeholder="프로젝트 추가...">
+            <input id="projectTitle" type="text" class="form-control" placeholder="프로젝트 추가..." name="projectTitle">
             <div class="input-group-append">
                 <button id="addProjectBtn" class="btn btn-primary" type="submit">Add Project!</button>
             </div>

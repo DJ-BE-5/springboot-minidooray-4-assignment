@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
@@ -14,16 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 public class MileStone {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long milestoneId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-
-    public MileStone(){
-
-    }
-    public MileStone(Long milestoneId, LocalDateTime startDate, LocalDateTime endDate){
-        this.milestoneId = milestoneId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 }

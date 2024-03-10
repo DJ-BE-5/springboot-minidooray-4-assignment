@@ -12,4 +12,5 @@ public class ProjectAccountDto {
     private Auth auth;
     private Long projectId;
     private AccountDto account;
+    private String accountId;
 }

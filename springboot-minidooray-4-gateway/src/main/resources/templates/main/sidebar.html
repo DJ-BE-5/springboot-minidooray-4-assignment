@@ -1,8 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div class="list-group">
-    <a href="/project/1/task" th:class="${#httpServletRequest.requestURI.contains('/task') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Task</a>
-    <a href="/project/1/member" th:class="${#httpServletRequest.requestURI.contains('/member') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Member</a>
-    <a href="/project/1/tag" th:class="${#httpServletRequest.requestURI.contains('/tag') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Tag</a>
-    <a href="/project/1/manage" th:class="${#httpServletRequest.requestURI.contains('/manage') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Project Manage</a>
+    <a th:href="@{'/project/' + ${projectId} + '/task'}" th:class="${#httpServletRequest.requestURI.contains('/task') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Task</a>
+    <a th:href="@{'/project/' + ${projectId} + '/member'}" th:class="${#httpServletRequest.requestURI.contains('/member') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Member</a>
+    <a th:href="@{'/project/' + ${projectId} + '/manage'}" th:class="${#httpServletRequest.requestURI.contains('/manage') ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'}">Project Manage</a>
 </div>

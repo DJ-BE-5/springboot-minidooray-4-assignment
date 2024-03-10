@@ -7,10 +7,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,6 +37,7 @@ public class AccountController {
         return "account";
     }
 
+    @PostMapping
     public ModelAndView updateAccount(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("redirect:/project");
 

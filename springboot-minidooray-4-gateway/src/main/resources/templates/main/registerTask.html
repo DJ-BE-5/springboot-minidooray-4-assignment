@@ -24,22 +24,22 @@
         </div>
         <div class="col-md-9">
             <h2>Create Task</h2>
-            <form action="/project/1/task/create" method="post">
+            <form th:action="@{'/project/' + ${projectId} + '/task/create'}" method="post">
                 <div class="form-group">
                     <label for="taskNameInput">Task Name</label>
-                    <input type="text" class="form-control" id="taskNameInput" placeholder="Enter task name">
+                    <input type="text" class="form-control" id="taskNameInput" name="title" placeholder="Enter task name">
                 </div>
                 <div class="form-group">
                     <label for="startDateInput">Start Date</label>
-                    <input type="date" class="form-control" id="startDateInput">
+                    <input type="datetime-local" class="form-control" id="startDateInput" name="startDate">
                 </div>
                 <div class="form-group">
                     <label for="endDateInput">End Date</label>
-                    <input type="date" class="form-control" id="endDateInput">
+                    <input type="datetime-local" class="form-control" id="endDateInput" name="endDate">
                 </div>
                 <div class="form-group">
                     <label for="taskContent">Content</label>
-                    <textarea id="taskContent" style="display: block; width: 100%; height: 150px; resize: none" class="card-text"></textarea>
+                    <textarea id="taskContent" style="display: block; width: 100%; height: 150px; resize: none" class="card-text" name="content"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Task</button>
             </form>

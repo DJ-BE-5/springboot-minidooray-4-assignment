@@ -51,10 +51,10 @@ public class RegisterTaskController {
             TaskDto taskDto = new TaskDto();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-            String title = request.getParameter("taskNameInput");
-            String content = request.getParameter("taskContent");
-            LocalDateTime startDateInput = LocalDateTime.parse(request.getParameter("startDateInput"), formatter);
-            LocalDateTime endDateInput = LocalDateTime.parse(request.getParameter("endDateInput"), formatter);
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
+            LocalDateTime startDateInput = LocalDateTime.parse(request.getParameter("startDate"));
+            LocalDateTime endDateInput = LocalDateTime.parse(request.getParameter("endDate"));
 
             MileStoneDto mileStoneDto = new MileStoneDto();
             mileStoneDto.setStartDate(startDateInput);
@@ -67,7 +67,7 @@ public class RegisterTaskController {
             HttpEntity<TaskDto> taskDtoEntity = new HttpEntity<>(taskDto, httpHeaders);
 
             restTemplate.exchange(
-                    apiProperties.getTaskEndPoint() + "/project/" + projectId + "/task",
+                    apiProperties.getTaskEndPoint() + "/task/create/project/" + projectId,
                     HttpMethod.POST,
                     taskDtoEntity,
                     new ParameterizedTypeReference<>() {}

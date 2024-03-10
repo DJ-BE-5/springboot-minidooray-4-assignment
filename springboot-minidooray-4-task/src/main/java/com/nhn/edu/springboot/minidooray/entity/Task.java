@@ -4,9 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +13,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Task {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     private String title;
     private String content;
@@ -21,14 +21,9 @@ public class Task {
     @OneToOne
     private MileStone mileStone;
 
-    public Task(){
-    }
+    @OneToMany
+    private List<Comment> comments;
 
-    public Task(Long taskId, String title, String content){
-        this.taskId = taskId;
-        this.title = title;
-        this.content = content;
-
-
-    }
+    @OneToMany
+    private List<Tag> tags;
 }

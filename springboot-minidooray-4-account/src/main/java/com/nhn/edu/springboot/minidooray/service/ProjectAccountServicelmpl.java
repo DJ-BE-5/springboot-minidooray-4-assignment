@@ -27,7 +27,7 @@ public class ProjectAccountServicelmpl implements ProjectAccountService{
     @Transactional
     public ProjectAccount createProjectAccount(ProjectAccount projectAccount) {
         boolean present = projectAccountRepository.findById(projectAccount.getProjectAccountId()).isPresent();
-        if(present) throw new IllegalArgumentException("already exist" + projectAccount.getAccountId());
+        if(present) throw new IllegalArgumentException("already exist" + projectAccount.getAccount().getAccountId());
 
         return projectAccountRepository.save(projectAccount);
     }

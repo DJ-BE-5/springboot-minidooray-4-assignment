@@ -2,7 +2,6 @@ package com.nhn.edu.springboot.minidooray.dto;
 
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -11,4 +10,5 @@ public class CommentDto {
     private String accountId;
     private LocalDateTime registeredTime;
     private Long taskId;
+    private String content;
 }

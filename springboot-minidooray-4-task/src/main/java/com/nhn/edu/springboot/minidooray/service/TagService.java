@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagService {
-    List<Tag> findAllTags();
     Optional<Tag> findTagById(Long tagId);
+    List<Tag> findTagsByTaskId(Long taskId);
     Tag createTag(TagDto tagDto);
     void deleteTag(Long tagId);
 }

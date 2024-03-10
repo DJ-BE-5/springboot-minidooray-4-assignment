@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.Optional;
 
 import static com.nhn.edu.springboot.minidooray.util.SaltUtil.getEncrypt;
 import static com.nhn.edu.springboot.minidooray.util.SaltUtil.getSalt;
@@ -33,10 +34,19 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<Account> getAccountById(@PathVariable String accountId) {
-        return accountService.findAccountById(accountId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<AccountDto> getAccountById(@PathVariable String accountId) {
+        Optional<Account> optionalAccount = accountService.findAccountById(accountId);
+
+        if(optionalAccount.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AccountDto accountDto = new AccountDto();
+
+        accountDto.setAccountId(optionalAccount.get().getAccountId());
+        accountDto.setEmail(optionalAccount.get().getEmail());
+
+        return ResponseEntity.ok(accountDto);
 }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

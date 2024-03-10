@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
-
-    List<Comment> findAllComments();
     Optional<Comment> findCommentById(Long commentId);
+    List<Comment> findCommentsByTaskId(Long taskId);
     Comment createComment(CommentDto commentDto);
-
     void deleteComment(Long commentId);
 }

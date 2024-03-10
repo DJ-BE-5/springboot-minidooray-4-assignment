@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MilestoneService {
-
-    List<MileStone> findAllMilestone();
-    Optional<MileStone> findMilestoneById(Long milestoneId);
+    Optional<MileStone> findMilestoneByTaskId(Long taskId);
     MileStone createMilestone(MilestoneDto milestoneDto);
 
     void deleteMilestone(Long milestoneId);

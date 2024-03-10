@@ -23,14 +23,5 @@ public class ProjectAccount {
     private Long projectId;
 
     @ManyToOne
-    private Account accountId;
-
-    public ProjectAccount() {
-    }
-
-    public ProjectAccount (Long projectAccountId, Auth auth, Long projectId) {
-        this.projectAccountId = projectAccountId;
-        this.auth = auth;
-        this.projectId = projectId;
-    }
+    private Account account;
 }

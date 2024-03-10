@@ -49,15 +49,22 @@
             <h3>Task 1</h3>
 
             <!-- MileStone -->
-            <p style="font-size: 14px">Start Date: 2024-03-08 | End Date: 2024-03-15</p>
+            <span style="font-size: 14px">
+                Start Date: <span th:text="${task.mileStone.startDate}"></span> |
+                End Date: <span th:text="${task.mileStone.endDate}"></span>
+            </span>
 
             <!-- Tags -->
             <div>
-                <div class="tag-box">Tag 1 <a href="/project/1/task/1/tag/delete/1" class="close">&times;</a></div>
-                <div class="tag-box">Tag 2 <a href="/project/1/task/1/tag/delete/2" class="close">&times;</a></div>
-                <form id="addTagForm" action="/project/1/task/1/tag/add" method="post">
+                <div th:each="tag : ${task.tags}" class="tag-box">
+                    <span th:text="${tag.title}"></span>
+                    <!-- 태그 삭제 링크 추가 -->
+                    <a th:href="@{'/project/' + ${projectId} + '/task/' + ${task.taskId} + '/tag/delete/' + ${tag.id}}" class="close">&times;</a>
+                </div>
+                <!-- 태그 추가 폼 -->
+                <form id="addTagForm" th:action="@{'/project/' + ${projectId} + '/task/' + ${task.taskId} + '/tag/add'}" method="post">
                     <div class="input-group mt-3">
-                        <input id="tagInput" type="text" class="form-control" placeholder="태그 추가...">
+                        <input id="tagInput" type="text" class="form-control" placeholder="태그 추가..." name="tagTitle">
                         <div class="input-group-append">
                             <button id="addTagBtn" class="btn btn-primary" type="submit">Add Tags!</button>
                         </div>
@@ -69,17 +76,17 @@
             <br/>
 
             <!-- will toggle according to Authentication -->
-            <div class="card">
+            <div th:if="${!isAuth}" class="card">
                 <div class="card-body">
-                    <p class="card-text">Task Content</p>
+                    <p class="card-text" th:text="${task.content}">Task Content</p>
                 </div>
             </div>
 
             <!-- will toggle according to Authentication -->
-            <form action="/project/1/task/1/content/modify" method="post">
+            <form th:if="${isAuth}" th:action="@{'/project/' + ${projectId} + '/task/' + ${taskId} + '/content/modify'}" method="post">
                 <div class="card">
                     <div class="card-body">
-                        <textarea style="display: block; width: 100%; height: 150px; resize: none" class="card-text">Task Content</textarea>
+                        <textarea style="display: block; width: 100%; height: 150px; resize: none" class="card-text" th:text="${task.content}" name="content"></textarea>
                         <br/>
                         <button type="submit" class="btn btn-sm btn-outline-secondary">
                             Modify
@@ -93,34 +100,31 @@
             <h4 class="mt-4">Comments</h4>
             <div class="card mt-2">
                 <div class="card-body">
-                    <div class="card mt-2">
+                    <!-- 각 댓글에 대한 반복문 -->
+                    <div th:each="comment : ${task.comments}" class="card mt-2">
                         <div class="card-body">
-                            <span>User 1</span>
-                            <span style="font-size: 12px">2024-03-08 19:00</span>
-                            <p class="card-text">Comment 1</p>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">수정</button>
-                                <button type="button" class="btn btn-sm btn-outline-danger">삭제</button>
-                            </div>
+                            <!-- 댓글 작성자와 작성일 표시 -->
+                            <span th:text="${comment.getAccountId()}"></span>
+                            <span style="font-size: 12px" th:text="${comment.registeredTime}"></span>
+                            <form th:action="@{'/project/' + ${projectId} + '/task/' + ${task.taskId} + '/comment/modify/' + ${comment.commentId}}" method="post">
+                                <!-- 댓글 내용 표시 -->
+                                <textarea style="display: block; width: 100%; height: 50px; resize: none" class="card-text" th:text="${comment.content}" name="commentContent"></textarea>
+                                <p th:if="${!comment.accountId.equals(accountId)}" class="card-text" th:text="${comment.content}" name="content"></p>
+                                <!-- 수정 및 삭제 버튼 -->
+                                <div th:if="${comment.accountId.equals(accountId)}" class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">수정</button>
+                                    <!-- 삭제 버튼, 해당 댓글의 ID를 사용하여 삭제 URL 동적 생성 -->
+                                    <a th:href="@{'/project/' + ${projectId} + '/task/' + ${task.taskId} + '/comment/delete/' + ${comment.commentId}}"
+                                       class="btn btn-sm btn-outline-danger">삭제</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <span>User 2</span>
-                            <span style="font-size: 12px">2024-03-08 19:00</span>
-                            <p class="card-text">Comment 2</p>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">수정</button>
-                                <button type="button" class="btn btn-sm btn-outline-danger">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-
                     <br/>
-
-                    <form action="/project/1/task/1/comment/create" method="post">
+                    <!-- 댓글 작성 폼 -->
+                    <form th:action="@{'/project/' + ${projectId} + '/task/' + ${task.taskId} + '/comment/create'}" method="post">
                         <div class="input-group mt-3">
-                            <input type="text" class="form-control" placeholder="댓글 추가...">
+                            <input type="text" class="form-control" placeholder="댓글 추가..." name="content">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">댓글 등록</button>
                             </div>

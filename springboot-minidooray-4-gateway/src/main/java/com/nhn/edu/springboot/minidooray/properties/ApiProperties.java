@@ -11,7 +11,7 @@ public class ApiProperties {
     private String taskEndPoint;
 
     public String getAccountEndPoint() {
-        return accountEndPoint;
+        return "http://localhost:9090";
     }
 
     public void setAccountEndPoint(String accountEndPoint) {
@@ -19,7 +19,7 @@ public class ApiProperties {
     }
 
     public String getTaskEndPoint() {
-        return taskEndPoint;
+        return "http://localhost:9999";
     }
 
     public void setTaskEndPoint(String taskEndPoint) {

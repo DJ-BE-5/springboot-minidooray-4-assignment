@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -34,7 +35,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ModelAndView postRegister(@RequestBody AccountDto accountDto) {
+    public ModelAndView postRegister(HttpServletRequest request) {
         /**
          * todo(0)
          *  create account
@@ -45,10 +46,16 @@ public class RegisterController {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
             httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
+            AccountDto accountDto = new AccountDto();
+
+            accountDto.setAccountId(request.getParameter("username"));
+            accountDto.setPassword(request.getParameter("password"));
+            accountDto.setEmail(request.getParameter("email"));
+
             HttpEntity<AccountDto> accountDtoEntity = new HttpEntity<>(accountDto, httpHeaders);
 
             restTemplate.exchange(
-                    apiProperties.getTaskEndPoint() + "/account",
+                    apiProperties.getAccountEndPoint() + "/",
                     HttpMethod.POST,
                     accountDtoEntity,
                     new ParameterizedTypeReference<>() {}

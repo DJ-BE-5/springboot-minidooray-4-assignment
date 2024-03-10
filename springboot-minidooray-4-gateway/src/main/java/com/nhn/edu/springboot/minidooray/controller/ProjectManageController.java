@@ -1,5 +1,6 @@
 package com.nhn.edu.springboot.minidooray.controller;
 
+import com.nhn.edu.springboot.minidooray.dto.ProjectAccountDto;
 import com.nhn.edu.springboot.minidooray.dto.ProjectDto;
 import com.nhn.edu.springboot.minidooray.properties.ApiProperties;
 import org.springframework.core.ParameterizedTypeReference;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -53,34 +55,35 @@ public class ProjectManageController {
     }
 
     @PostMapping("/modify")
-    public ModelAndView modifyProjectName(@PathVariable Long projectId,
-                                          @RequestBody ProjectDto projectDto) {
+    public String modifyProjectName(@PathVariable Long projectId,
+                                          HttpServletRequest request) {
         /**
          * todo(10)
          *  make function which can modify project name.
          */
-        ModelAndView mav = new ModelAndView("/project/" + projectId + "/manage");
 
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
             httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
+            ProjectDto projectDto = new ProjectDto();
+            projectDto.setTitle(request.getParameter("projectName"));
+
             HttpEntity<ProjectDto> projectDtoEntity = new HttpEntity<>(projectDto, httpHeaders);
 
             // todo: change api url
             restTemplate.exchange(
-                    apiProperties.getTaskEndPoint() + "/project/" + projectId,
+                    apiProperties.getTaskEndPoint() + "/project/modify/" + projectId,
                     HttpMethod.PUT,
                     projectDtoEntity,
                     new ParameterizedTypeReference<>() {}
             );
 
         } catch(Exception e) {
-            mav.setViewName("error");
+        } finally {
+            return "redirect:/project/" + projectId + "/manage";
         }
-
-        return mav;
     }
 
     @PostMapping("/delete")
@@ -99,11 +102,30 @@ public class ProjectManageController {
 
             // todo: change api url
             restTemplate.exchange(
-                    apiProperties.getTaskEndPoint() + "/project/" + projectId,
+                    apiProperties.getTaskEndPoint() + "/project/delete/" + projectId,
                     HttpMethod.DELETE,
                     null,
                     new ParameterizedTypeReference<>() {}
             );
+
+            // todo: change api url
+            ResponseEntity<List<ProjectAccountDto>> projectAccountDtoList = restTemplate.exchange(
+                    apiProperties.getAccountEndPoint() + "/project/" + projectId,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<>() {}
+            );
+
+            for(ProjectAccountDto projectAccountDto : projectAccountDtoList.getBody()) {
+                String accountId = projectAccountDto.getAccountId();
+
+                restTemplate.exchange(
+                        apiProperties.getAccountEndPoint() + "/project/" + projectId + "/account/" + accountId,
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<>() {}
+                );
+            }
 
         } catch(Exception e) {
             mav.setViewName("error");
