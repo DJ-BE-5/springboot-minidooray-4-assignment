@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class ProjectAccountDto {
     public enum Auth {
-        ADMIN,USER}
+        ADMIN,USER
+    }
 
     private Long projectAccountId;
     private Auth auth;
