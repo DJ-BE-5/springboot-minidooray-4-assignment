@@ -17,7 +17,6 @@ import static com.nhn.edu.springboot.minidooray.util.SaltUtil.getEncrypt;
 import static com.nhn.edu.springboot.minidooray.util.SaltUtil.getSalt;
 
 @RestController
-@RequestMapping("/account")
 public class AccountController {
     private final AccountService accountService;
 
@@ -55,7 +54,7 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
-    @DeleteMapping("/{accountId}")
+    @DeleteMapping("/delete/{accountId}")
     public ResponseEntity <Void> deleteAccount (@PathVariable String accountId) {
         accountService.deleteAccount(accountId);
         return ResponseEntity.notFound().build();

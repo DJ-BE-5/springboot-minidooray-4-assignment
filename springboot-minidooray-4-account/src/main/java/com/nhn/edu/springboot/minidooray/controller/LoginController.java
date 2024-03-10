@@ -21,7 +21,6 @@ public class LoginController {
     @Autowired
     private AccountRepository accountRepository;
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AccountDto accountDto) {
         if(!accountRepository.existsById(accountDto.getAccountId())) {
