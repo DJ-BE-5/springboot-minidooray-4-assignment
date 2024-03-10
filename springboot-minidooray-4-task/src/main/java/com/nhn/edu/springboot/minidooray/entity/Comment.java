@@ -22,14 +22,4 @@ public class Comment {
 
     @ManyToOne
     private Task task;
-    /*
-    public Comment(){
-    }
-    public Comment(Long commentId, Long accountId, String email, LocalDateTime registeredTime){
-        this.commentId = commentId;
-        this.accountId = accountId;
-        this.email = email;
-        this.registeredTime = registeredTime;
-
-    }*/
 }
