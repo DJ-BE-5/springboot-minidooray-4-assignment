@@ -11,9 +11,9 @@ public class ProjectDto {
     };
 
     private Long projectId;
+    private String title;
     private Status status;
     private List<AccountDto> accounts;
     private List<TaskDto> tasks;
-
     private List<TagDto> tags;
 }

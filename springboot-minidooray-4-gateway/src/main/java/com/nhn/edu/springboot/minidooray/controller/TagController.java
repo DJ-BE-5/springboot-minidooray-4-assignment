@@ -1,16 +1,12 @@
 package com.nhn.edu.springboot.minidooray.controller;
 
+import com.nhn.edu.springboot.minidooray.dto.TagDto;
 import com.nhn.edu.springboot.minidooray.dto.TaskDto;
 import com.nhn.edu.springboot.minidooray.properties.ApiProperties;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,12 +36,14 @@ public class TagController {
             httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
             // todo: change api url
-            ResponseEntity<List<TaskDto>> taskExchange = restTemplate.exchange(
+            ResponseEntity<List<TagDto>> tagExchange = restTemplate.exchange(
                     apiProperties.getTaskEndPoint() + "/project/" + projectId + "/tag",
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<>() {}
             );
+
+            mav.addObject("tags", tagExchange.getBody());
 
             return mav;
         } catch(Exception e) {
@@ -67,6 +65,33 @@ public class TagController {
                     apiProperties.getTaskEndPoint() + "/tag/delete/" + tagId,
                     HttpMethod.DELETE,
                     null,
+                    new ParameterizedTypeReference<>() {}
+            );
+
+            return "redirect:/project/" + projectId + "/tag";
+        } catch(Exception e) {
+            return "error";
+        }
+    }
+
+    @PostMapping("/create")
+    public String createTag(@PathVariable("projectId") Long projectId,
+                            @RequestBody TagDto tagDto) {
+        /**
+         * todo(14)
+         *  create tag api
+         */
+        try {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+            httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+            HttpEntity<TagDto> tagDtoEntity = new HttpEntity<>(tagDto, httpHeaders);
+
+            restTemplate.exchange(
+                    apiProperties.getTaskEndPoint() + "/project/create/tag",
+                    HttpMethod.POST,
+                    tagDtoEntity,
                     new ParameterizedTypeReference<>() {}
             );
 
