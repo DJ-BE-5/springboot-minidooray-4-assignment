@@ -1,3 +1,5 @@
+package com.nhn.edu.springboot.minidooray;
+
 import com.nhn.edu.springboot.minidooray.entity.Account;
 import com.nhn.edu.springboot.minidooray.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //AccountResitory가 특정 Account을 반환하도록 MOCK된 경우,
-//getAccountId 엔드 포인트가 예상된 JSON응답을 반환하는 테스트케이스입니다.
+//getAccountId 엔드 포인트가 예상된 JSON응답을 반환하는 테스트케이스
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 public class AccountControllerMockBeanTest {
@@ -37,9 +39,10 @@ public class AccountControllerMockBeanTest {
         mockMvc.perform(get("/account/testAccountId"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value("testId"))
-                .andExpect(jsonPath("$.emal").value("test@naver.com"))
-                .andExpect(jsonPath("$.password").doesNotExist());
+                .andExpect(jsonPath("$.accountId").value("testId"))
+                .andExpect(jsonPath("$.email").value("test@naver.com"))
+                .andExpect(jsonPath("$.salt").value("testSalt"))
+                .andExpect(jsonPath("$.saltedPassword").value("testSaltedPassword"));
 
     }
 }
